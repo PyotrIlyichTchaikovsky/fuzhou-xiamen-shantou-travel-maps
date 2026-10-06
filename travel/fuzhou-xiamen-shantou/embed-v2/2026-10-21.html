@@ -8,10 +8,15 @@
 </style></head><body><script>if(window.self!==window.top)document.body.classList.add('is-embedded')</script><a id="open-large" href="" target="_blank" rel="noopener">↗ 打开大图</a><script>document.getElementById('open-large').href=location.href</script>
 <header><h1 id="heading"></h1><p id="note"></p><div class="choices" id="choices"></div><div class="legend"><span><i style="background:#0d9488"></i>步行</span><span><i style="background:#e77835"></i>打车／包车／景区车</span><span><i style="background:#5579b0"></i>轮渡／动车示意</span></div></header>
 <main><div class="map-wrap"><div id="map" aria-label="交互式路线地图"></div><div id="status"></div></div><section class="bar"><h2>游览顺序 · 点按地点看详情</h2><div class="stop-list" id="list"></div><p class="hint">彩色线标明路段方式。步行／动车直线为路线关系示意；驾车线按道路服务生成。实际交通以现场开放和车票为准。</p></section></main>
-<script id="route-data" type="application/json">{"title":"汕头｜小公园开埠区","city":"汕头","note":"午饭后再出门，围绕老城短距离步行、边走边吃。","points":[{"name":"小公园中山纪念亭","coord":[116.6694518,23.3578525],"what":"骑楼、放射状街道与商埠风貌","stay":"约45分钟","source":"https://www.openstreetmap.org/search?query=汕头小公园中山纪念亭","datum":"WGS84"},{"name":"老妈宫·升平路","coord":[116.6708631,23.3573007],"what":"潮汕庙宇、嵌瓷与屋脊装饰","stay":"约30分钟","source":"https://www.wikidata.org/wiki/Q11133520","datum":"WGS84"},{"name":"镇邦路老城街区","coord":[116.6653903,23.3530902],"what":"老城小吃与骑楼街景","stay":"约45分钟","source":"https://www.openstreetmap.org/search?query=汕头镇邦路","datum":"WGS84"}],"modes":["步行","步行"],"segments":[{"mode":"步行","coords":[[116.6694518,23.3578525],[116.6708631,23.3573007]]},{"mode":"步行","coords":[[116.6708631,23.3573007],[116.6653903,23.3530902]]}]}</script>
+<script id="route-source" type="application/json">{"path":"../routes/2026-10-21.json"}</script>
 <script type="module">
 import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.mjs';
-const data=JSON.parse(document.getElementById('route-data').textContent), mapbox=document.getElementById('map'), list=document.getElementById('list'), status=document.getElementById('status');
+async function loadRoute(path){
+  const url=new URL(path,location.href);url.searchParams.set('rev',String(Date.now()));
+  try{const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);return await response.json()}
+  catch(error){const box=document.getElementById('status');box.textContent='路线数据暂时无法加载，请刷新重试。';box.style.display='block';throw error}
+}
+const data=await loadRoute(JSON.parse(document.getElementById('route-source').textContent).path), mapbox=document.getElementById('map'), list=document.getElementById('list'), status=document.getElementById('status');
 document.getElementById('heading').textContent=data.title;document.getElementById('note').textContent=data.note;
 let map,markers=[],active=0;
 function shade(mode){return /步行/.test(mode)?'#0d9488':/动车|轮渡/.test(mode)?'#5579b0':'#e77835'}
@@ -30,4 +35,3 @@ function show(choice){active=choice;markers.forEach(m=>m.remove());markers=[];li
 if(data.alternatives){const choices=document.getElementById('choices');['轮渡（最轻松）',...data.alternatives.map(x=>x.label)].forEach((label,i)=>{const b=document.createElement('button');b.textContent=label;b.onclick=()=>show(i);choices.appendChild(b)})}
 try{map=new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/bright',center:data.points[0].coord,zoom:12,attributionControl:true,localIdeographFontFamily:'"PingFang SC","Microsoft YaHei",sans-serif'});map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');map.on('load',()=>{for(const layer of map.getStyle().layers){if(/poi|airport|transit/.test(layer.id)&&layer.type==='symbol'){try{map.setLayoutProperty(layer.id,'visibility','none')}catch{}}}show(0)});map.on('error',e=>{if(e.error&&/style|tile|network/i.test(String(e.error.message))){status.textContent='底图加载较慢，请检查网络后刷新；路线点仍可在下方查看。';status.style.display='block'}})}catch(e){status.textContent='地图加载失败：'+e.message;status.style.display='block'}
 </script></body></html>
-
