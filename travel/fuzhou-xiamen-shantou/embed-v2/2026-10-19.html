@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>厦门｜八市 → 龙舟池 → 集美建筑 → 鳌园｜当日路线图</title>
+<title>路线载入中｜当日路线图</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.css">
 <style>
 #open-large{display:none;position:fixed;bottom:9px;left:9px;z-index:1000;border:1px solid #bed0d9;border-radius:8px;background:#fff;color:#173d53;padding:6px 9px;font:600 12px system-ui,"Microsoft YaHei",sans-serif;text-decoration:none;box-shadow:0 2px 8px #1233}body.is-embedded #open-large{display:block}body.is-embedded header{padding:6px 10px}body.is-embedded header p{display:none}body.is-embedded h1{font-size:14px;margin:0}body.is-embedded .legend{margin-top:4px;gap:4px}body.is-embedded .legend span{font-size:10px;padding:2px 5px}body.is-embedded .filters{padding:5px 0 0}body.is-embedded .filters button{padding:4px 7px;font-size:11px}body.is-embedded .map-wrap{height:calc(100vh - 98px);min-height:0;max-height:none}body.is-embedded .bar{display:none}
@@ -17,7 +17,7 @@ async function loadRoute(path){
   catch(error){const box=document.getElementById('status');box.textContent='路线数据暂时无法加载，请刷新重试。';box.style.display='block';throw error}
 }
 const data=await loadRoute(JSON.parse(document.getElementById('route-source').textContent).path), mapbox=document.getElementById('map'), list=document.getElementById('list'), status=document.getElementById('status');
-document.getElementById('heading').textContent=data.title;document.getElementById('note').textContent=data.note;
+document.title=data.title+'｜当日路线图';document.getElementById('heading').textContent=data.title;document.getElementById('note').textContent=data.note;
 let map,markers=[],active=0;
 function shade(mode){return /步行/.test(mode)?'#0d9488':/动车|轮渡/.test(mode)?'#5579b0':'#e77835'}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
