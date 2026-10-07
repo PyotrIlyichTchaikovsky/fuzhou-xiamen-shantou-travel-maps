@@ -1,82 +1,21 @@
 {
-  "title": "汕头｜机动轻松收尾",
+  "title": "汕头｜返程前休整日·时代广场片区",
   "city": "汕头",
-  "note": "原攻略为三选一或二。默认展示最省力的内海湾轮渡；可切换到潮博或礐石，不把三处强行串成固定路线。",
+  "note": "10月19日已抵达汕头，20日至22日完成老城、南澳岛和机动游览。今天以酒店休息、整理行李为主；时代广场仅是建议住宿片区示意，并非已订酒店或必须游览的景点。",
   "points": [
     {
-      "name": "广场轮渡码头",
+      "name": "时代广场·住宿片区示意",
       "coord": [
-        116.6812231,
-        23.3533097
+        116.714197,
+        23.360329
       ],
-      "what": "渡轮起点与城市水岸",
-      "stay": "约15分钟",
-      "source": "https://www.openstreetmap.org/node/5504507055",
-      "datum": "WGS84"
-    },
-    {
-      "name": "礐石码头",
-      "coord": [
-        116.6721642,
-        23.3429766
-      ],
-      "what": "内海湾、跨海大桥与两岸风景",
-      "stay": "船程加停留约45分钟",
-      "source": "https://www.openstreetmap.org/search?query=汕头礐石码头",
-      "datum": "WGS84"
+      "what": "就近用餐、休息；不安排正式景点",
+      "stay": "全天弹性",
+      "source": "https://ditu.amap.com/place/B02F2004F3",
+      "datum": "GCJ-02→WGS84"
     }
   ],
-  "modes": [
-    "轮渡"
-  ],
-  "alternatives": [
-    {
-      "label": "潮博（室内）",
-      "points": [
-        {
-          "name": "潮汕历史文化博览中心·北门",
-          "coord": [
-            116.711295,
-            23.324769
-          ],
-          "what": "潮汕文化、华侨文化与建筑空间",
-          "stay": "约1～2小时",
-          "source": "https://www.amap.com/place/B0LDYUZLIM",
-          "datum": "GCJ-02→WGS84"
-        }
-      ]
-    },
-    {
-      "label": "礐石（较费腿）",
-      "points": [
-        {
-          "name": "礐石风景区·塔山景区",
-          "coord": [
-            116.6741898,
-            23.3346153
-          ],
-          "what": "山石、绿植与内海湾视野",
-          "stay": "约1～1.5小时",
-          "source": "https://www.openstreetmap.org/search?query=礐石风景名胜区",
-          "datum": "WGS84"
-        }
-      ]
-    }
-  ],
+  "modes": [],
   "date": "2026-10-23",
-  "segments": [
-    {
-      "mode": "轮渡",
-      "coords": [
-        [
-          116.6812231,
-          23.3533097
-        ],
-        [
-          116.6721642,
-          23.3429766
-        ]
-      ]
-    }
-  ]
+  "segments": []
 }
